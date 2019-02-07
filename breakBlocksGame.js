@@ -6,25 +6,19 @@ let ballX = 50;
 let ballY = 50;
 let ballSpeedX = 10;
 let ballSpeedY = 5;
-
 let paddleWidth = 100;
 let paddleHeight = 10;
-
 let blocksRows = 4;
 let rowsY = 100;
-
 let paddlePlayerX = 0;
 let paddlePlayerY = 10;
-
 let ballMoving = false;
 let ballRadius = 5;
-
 let blocksHeight = 40;
 let blocksWidth = 90;
-
 let blockCollision = [];
-
 let startGame = true;
+let lifes = 5;
 
 window.onload = () => {
   canvas = document.getElementById('canvasGame');
@@ -53,6 +47,15 @@ window.onload = () => {
 
 }
 
+drawLifes = () => {
+  let lifeX = 10;
+  let lifeY = 10;
+  for (var i = 0; i < lifes; i++) {
+    colorGame(lifeX, lifeY, 5, 10, 'white');
+    lifeX+=10;
+  }
+}
+
 calculateMousePaddle = (event) => {
   let rect = canvas.getBoundingClientRect();
   let root = document.documentElement;
@@ -66,6 +69,7 @@ calculateMousePaddle = (event) => {
 }
 
 restartBall = () => {
+  lifes--;
   ballMoving = false;
 }
 
@@ -114,6 +118,8 @@ drawEverything = () => {
   colorBall(ballX, ballY, ballRadius, 'white')
 
   createBlocks();
+
+  drawLifes();
 
   checkBlockCollision();
 
